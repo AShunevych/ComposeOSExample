@@ -6,7 +6,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build app
-      run: ./gradlew assembleDebug assembleAndroidTest
+      run: chmod +x ./gradlew assembleDebug assembleAndroidTest
     - name: Run tests
       uses: MarathonLabs/action-test@0
       with:
