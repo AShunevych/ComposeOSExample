@@ -10,6 +10,7 @@ jobs:
      - name: Set Up JDK
        uses: actions/setup-java@v3
        with:
+        distribution: 'correto'
         java-version: '11'
 
      - name: Change wrapper permissions
