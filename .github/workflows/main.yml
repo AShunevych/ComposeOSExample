@@ -38,3 +38,4 @@ jobs:
         testApplication: app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
         platform: Android
         device: Watch
+        
