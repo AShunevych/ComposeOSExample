@@ -36,4 +36,5 @@ jobs:
         apiKey: 8qWrAp8NJZzrd0h7RkKBuVJRTVMlola60Lf9
         application: app/build/outputs/apk/debug/app-debug.apk
         testApplication: app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
-        platform: Watch
+        platform: Android
+        device: Watch
