@@ -31,9 +31,10 @@ jobs:
           path: app/build/outputs/apk/
         
      - name: Run tests
-       uses: MarathonLabs/action-test@0
+       uses: MarathonLabs/action-test@01
        with:
         apiKey: 8qWrAp8NJZzrd0h7RkKBuVJRTVMlola60Lf9
+        version: 1
         application: app/build/outputs/apk/debug/app-debug.apk
         testApplication: app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
         platform: Android
