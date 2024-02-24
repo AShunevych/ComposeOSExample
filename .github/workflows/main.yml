@@ -40,7 +40,7 @@ jobs:
         platform: Android
         output: "./tmp/results"
         name: "Watch_test_GHA" 
-        device: watch    
+        device: Watch    
             
      - name: Upload results
        uses: actions/upload-artifact@v4
