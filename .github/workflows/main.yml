@@ -32,24 +32,32 @@ jobs:
      - name: Build apk debug test project (APK)
        run: ./gradlew assembleAndroidTest
 
-     - name: Upload results
-       uses: actions/upload-artifact@v4
-       with:
-          name: APKs-${{ inputs.task }}
-          path: app/build/outputs/apk/
+     - name: Create dir
+       run: |
+          mkdir tmp/results
 
      - name: Artifact status
        uses: xSAVIKx/artifact-exists-action@v0
        with:
          name: "APKs-${{ inputs.task }}"
         
-     # - name: Run tests
-     #   uses: MarathonLabs/action-test@01
-     #   with:
-     #    apiKey: 8qWrAp8NJZzrd0h7RkKBuVJRTVMlola60Lf9
-     #    version: 1
-     #    application: app/build/outputs/apk/debug/app-debug.apk
-     #    testApplication: app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
-     #    platform: Android
-     #    device: Watch
+     - name: Run tests
+       uses: MarathonLabs/action-test@01
+       with:
+        name: Watch_test_GHA
+        apiKey: 8qWrAp8NJZzrd0h7RkKBuVJRTVMlola60Lf9
+        version: 1
+        application: app/build/outputs/apk/debug/app-debug.apk
+        testApplication: app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+        platform: Android
+        device: watch
+        output: tmp/results
+        
+     - name: Upload results
+       uses: actions/upload-artifact@v4
+       with:
+          name: APKs-${{ inputs.task }}
+          path: tmp/results
+
+        
         
