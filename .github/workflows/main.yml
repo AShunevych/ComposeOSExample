@@ -31,7 +31,7 @@ jobs:
           mkdir -p tmp/results
 
      - name: Run tests
-       uses: MarathonLabs/action-test@1
+       uses: MarathonLabs/action-test@2
        with:
         apiKey: 8qWrAp8NJZzrd0h7RkKBuVJRTVMlola60Lf9
         version: "1.0.1"
