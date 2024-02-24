@@ -31,15 +31,16 @@ jobs:
           mkdir -p tmp/results
 
      - name: Run tests
-       uses: MarathonLabs/action-test@2
+       uses: MarathonLabs/action-test@1
        with:
         apiKey: 8qWrAp8NJZzrd0h7RkKBuVJRTVMlola60Lf9
         version: "1.0.1"
         application: app/build/outputs/apk/debug/app-debug.apk
         testApplication: app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
-        platform: Android
+        platform: android 
+        osVersion: 13
         output: "./tmp/results"
-        name: "Watch_test_GHA" 
+        name: Watch_test_GHA
         device: Watch    
             
      - name: Upload results
