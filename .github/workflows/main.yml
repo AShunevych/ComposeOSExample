@@ -1,12 +1,6 @@
 name: Run tests
 on: 
   workflow_dispatch:
-    inputs:
-      task:
-        description: 'task to run'
-        required: false
-        default: 'watch-ui-tests'
-
 
 jobs:
   run-tests:
@@ -34,13 +28,8 @@ jobs:
 
      - name: Create dir
        run: |
-          mkdir tmp/results
+          mkdir -p tmp/results
 
-     - name: Artifact status
-       uses: xSAVIKx/artifact-exists-action@v0
-       with:
-         name: "APKs-${{ inputs.task }}"
-        
      - name: Run tests
        uses: MarathonLabs/action-test@1
        with:
