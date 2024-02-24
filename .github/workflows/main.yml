@@ -34,14 +34,14 @@ jobs:
        uses: MarathonLabs/action-test@1
        with:
         apiKey: 8qWrAp8NJZzrd0h7RkKBuVJRTVMlola60Lf9
-        version: 1
+        version: "1.0.1"
         application: app/build/outputs/apk/debug/app-debug.apk
         testApplication: app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
         platform: Android
-        device: watch
         output: "./tmp/results"
-        name: Watch_test_GHA 
-        
+        name: "Watch_test_GHA" 
+        device: watch    
+            
      - name: Upload results
        uses: actions/upload-artifact@v4
        with:
