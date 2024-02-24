@@ -42,7 +42,7 @@ jobs:
          name: "APKs-${{ inputs.task }}"
         
      - name: Run tests
-       uses: MarathonLabs/action-test@01
+       uses: MarathonLabs/action-test@1
        with:
         name: Watch_test_GHA
         apiKey: 8qWrAp8NJZzrd0h7RkKBuVJRTVMlola60Lf9
