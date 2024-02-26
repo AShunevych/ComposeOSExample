@@ -41,7 +41,7 @@ jobs:
         osVersion: 13
         output: "./tmp/results"
         name: Watch_test_GHA
-        device: Watch    
+        device: watch    
             
      - name: Upload results
        uses: actions/upload-artifact@v4
