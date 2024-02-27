@@ -1,5 +1,7 @@
 name: Run tests
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+
 jobs:
   run-tests:
    runs-on: ubuntu-latest
@@ -24,19 +26,29 @@ jobs:
      - name: Build apk debug test project (APK)
        run: ./gradlew assembleAndroidTest
 
+     - name: Create dir
+       run: |
+          mkdir -p tmp/results
+
+     - name: Run tests
+       uses: MarathonLabs/action-test@1
+       with:
+        apiKey: 8qWrAp8NJZzrd0h7RkKBuVJRTVMlola60Lf9
+        version: "1.0.3"
+        application: app/build/outputs/apk/debug/app-debug.apk
+        testApplication: app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+        platform: android 
+        osVersion: 13
+        systemImage: 'google_apis'
+        output: "./tmp/results"
+        name: 'Watch_test_GHA'
+        device: 'watch'    
+            
      - name: Upload results
        uses: actions/upload-artifact@v4
        with:
-          name: APK's
-          path: app/build/outputs/apk/
+          name: APKs-${{ inputs.task }}
+          path: tmp/results
+
         
-     - name: Run tests
-       uses: MarathonLabs/action-test@01
-       with:
-        apiKey: 8qWrAp8NJZzrd0h7RkKBuVJRTVMlola60Lf9
-        version: 1
-        application: app/build/outputs/apk/debug/app-debug.apk
-        testApplication: app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
-        platform: Android
-        device: Watch
         
