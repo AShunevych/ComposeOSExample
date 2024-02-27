@@ -38,7 +38,7 @@ jobs:
         application: app/build/outputs/apk/debug/app-debug.apk
         testApplication: app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
         platform: android 
-        osVersion: 13
+        osVersion: 11
         systemImage: 'google_apis'
         output: "./tmp/results"
         name: 'Watch_test_GHA'
