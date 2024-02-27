@@ -45,6 +45,7 @@ jobs:
         device: 'watch'    
             
      - name: Upload results
+       if: always()
        uses: actions/upload-artifact@v4
        with:
           name: APKs-${{ inputs.task }}
