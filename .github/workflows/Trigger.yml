@@ -1,0 +1,13 @@
+name: Pull Triger
+on:
+ pull_request:
+   branches:
+     - 'development'
+ workflow_dispatch:
+
+jobs:
+ build_and_run_tests:
+  runs-on: ubuntu-latest
+  steps:
+   - name: Checkout
+     uses: actions/checkout@v3
