@@ -1,0 +1,15 @@
+name: download apk's
+
+on:
+ workflow_call:
+   
+
+jobs:
+  download:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/download-artifact@v4
+          with:
+            name: my-other-artifact
+            run-id: 1234
+            github-token: ${{ github.token }}
