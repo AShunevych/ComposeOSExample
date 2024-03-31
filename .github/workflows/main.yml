@@ -27,7 +27,7 @@ jobs:
      - name: Build apk debug test project (APK)
        run: ./gradlew assembleAndroidTest
 
-    - name: Run tests
+     - name: Run tests
        uses: MarathonLabs/action-test@1
        with:
         apiKey: 8qWrAp8NJZzrd0h7RkKBuVJRTVMlola60Lf9
