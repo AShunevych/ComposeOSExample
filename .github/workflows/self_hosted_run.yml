@@ -13,13 +13,18 @@ jobs:
      - name: Build apk debug project (APK)
        run: ./gradlew assembleDebug
 
+     - name: Get workspace env
+       run: |
+        echo "Github_workspace=$${{ github.workspace }}" >> $GITHUB_ENV
+
      # Create APK Debug
      - name: Build apk debug test project (APK)
        run: ./gradlew assembleAndroidTest
-  
+
+      
      - name: Upload results
        if: always()
        uses: actions/upload-artifact@v4
        with:
           name: APKs-${{ inputs.task }}
-          path: tmp/results
+          path: ${{ github.workspace }}/app/build/outputs/apk
