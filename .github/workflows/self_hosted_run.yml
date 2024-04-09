@@ -1,6 +1,7 @@
 name: Run tests (Self-hosted)
 on: 
   workflow_dispatch:
+  workflow_call:
 
 jobs:
   run-tests:
@@ -16,27 +17,6 @@ jobs:
      # Create APK Debug
      - name: Build apk debug test project (APK)
        run: ./gradlew assembleAndroidTest
-
-     - name: Run tests
-       uses: MarathonLabs/action-test@1
-       with:
-        apiKey: 8qWrAp8NJZzrd0h7RkKBuVJRTVMlola60Lf9
-        version: "1.0.3"
-        application: ${{ github.workspace }}/app/build/outputs/apk/debug/app-debug.apk
-        testApplication: ${{ github.workspace }}/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
-        platform: android 
-        osVersion: 11
-        systemImage: 'google_apis'
-        output: "${{ runner.temp }}"
-        name: 'Watch_test_GHA'
-        device: 'watch'    
-  
-     - name: Upload results
-       if: always()
-       uses: actions/upload-artifact@v4
-       with:
-          name: Results
-          path: ${{ runner.temp }}
       
      - name: Upload results
        if: always()
