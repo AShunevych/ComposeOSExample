@@ -17,7 +17,6 @@ jobs:
           with:
             name: APKs
             path: tmp/results
-            run-id: ${{ github.event.workflow_run.id }}
             github-token: ${{ github.token }}
 
         - name: Upload results to verify
