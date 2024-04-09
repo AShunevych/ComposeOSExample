@@ -1,15 +1,28 @@
-name: download apk's
+name: download apks
 
 on:
  workflow_call:
    
-
 jobs:
   download:
       runs-on: ubuntu-latest
       steps:
-        - uses: actions/download-artifact@v4
+
+        - name: Create dir
+          run: |
+           mkdir -p tmp/results
+      
+        - name: Download artifacts
+          uses: actions/download-artifact@v4
           with:
-            name: my-other-artifact
-            run-id: 1234
+            path: tmp/results
+            run-id: ${{ github.event.workflow_run.id }}
             github-token: ${{ github.token }}
+
+        - name: Upload results to verify
+          if: always()
+          uses: actions/upload-artifact@v4
+          with:
+            name: APKs-new
+            path: tmp/results
+           
