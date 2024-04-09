@@ -7,4 +7,5 @@ jobs:
     uses: ./.github/workflows/self_hosted_run.yml
 
   download_apks:
+    if: always() && needs.create_apks.result != 'skipped' 
     uses: ./.github/workflows/download_apks.yml
