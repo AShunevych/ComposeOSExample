@@ -3,14 +3,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-tests:
-   runs-on: [self-hosted, win-runner]
-   steps:
-     - name: Checkout 
-       uses: actions/checkout@v3
+  create_apks:
+    uses: ./.github/workflows/self_hosted_run.yml
 
-     - name: Get workspace envs
-       shell: bash
-       run: |
-         echo "Github_workspace=$${{ github.workspace }}" >> $GITHUB_ENV
-         echo "runner_Cache=$${{ runner.tool_cache }}" >> $GITHUB_ENV
+  download_apks:
+    uses: ./.github/workflows/download_apks.yml
