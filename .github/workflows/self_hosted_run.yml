@@ -37,24 +37,31 @@ jobs:
   download:
     needs: build
     if: always() && needs.build.result != 'cancelled'
-    runs-on: [self-hosted, win-runner]
+    runs-on: ubuntu-latest
     steps:
-        - name: Create dir
-          run: |
-           mkdir -p tmp/results
+       - name: Create dir
+         run: |
+          mkdir -p tmp/results
       
-        - name: Download artifacts
-          uses: actions/download-artifact@v4
-          with:
-            name: APKs
-            path: tmp/results
-            github-token: ${{ github.token }}
+       - name: Download artifacts
+         uses: actions/download-artifact@v4
+         with:
+          name: APKs
+          path: tmp/results
+          github-token: ${{ github.token }}
 
-        - name: Upload results to verify
-          if: always()
-          uses: actions/upload-artifact@v4
-          with:
-            name: APKs-new-win
+       - name: Upload new artifact
+         if: always() && inputs.use_artifacts_from_flow == false
+         uses: actions/upload-artifact@v4
+         with:
+            name: APKs-new
+            path: tmp/results
+
+       - name: Re-Upload Same artifact
+         if: always() && inputs.use_artifacts_from_flow == true
+         uses: actions/upload-artifact@v4
+         with:
+            name: APKs-re-uploaded
             path: tmp/results
           
 
