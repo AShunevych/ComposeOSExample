@@ -2,10 +2,18 @@ name: Run tests (Self-hosted)
 on: 
   workflow_dispatch:
   workflow_call:
+    inputs:
+     use_artifacts_from_flow:
+       description: Set to true if you want to skip build 
+       required: false
+       type: boolean
+       default: false
+       
 
 jobs:
-  run-tests:
+  build:
    runs-on: [self-hosted, win-runner]
+   if: inputs.use_artifacts_from_flow == false
    steps:
      - name: Checkout 
        uses: actions/checkout@v3
@@ -24,3 +32,30 @@ jobs:
        with:
           name: APKs
           path: ${{ github.workspace }}/app/build/outputs/apk
+          overwrite: true
+          
+  download:
+    needs: build
+    if: always() && needs.build.result != 'cancelled'
+    runs-on: [self-hosted, win-runner]
+    steps:
+        - name: Create dir
+          run: |
+           mkdir -p tmp/results
+      
+        - name: Download artifacts
+          uses: actions/download-artifact@v4
+          with:
+            name: APKs
+            path: tmp/results
+            github-token: ${{ github.token }}
+
+        - name: Upload results to verify
+          if: always()
+          uses: actions/upload-artifact@v4
+          with:
+            name: APKs-new-win
+            path: tmp/results
+          
+
+          
