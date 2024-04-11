@@ -6,20 +6,20 @@ jobs:
   create_apks:
     uses: ./.github/workflows/self_hosted_run.yml
 
-  download_apks:
+  download_apks_without_build_step_exists:
     needs: create_apks
     if: always() && needs.create_apks.result != 'skipped' 
     uses: ./.github/workflows/download_apks.yml
 
-  use_from_flow:
+  use_from_flow_for_same_job:
     needs: create_apks
     if: always() && needs.create_apks.result != 'skipped' 
     uses: ./.github/workflows/self_hosted_run.yml
     with:
       use_artifacts_from_flow: true
 
-  create_new:
-    needs: use_from_flow
-    if: always() && needs.use_from_flow.result != 'skipped' 
+  create_new_apk_when_having_artifacts:
+    needs: use_from_flow_for_same_job
+    if: always() && needs.use_from_flow_for_same_job.result != 'skipped' 
     uses: ./.github/workflows/self_hosted_run.yml
       
