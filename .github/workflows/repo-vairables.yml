@@ -22,4 +22,6 @@ jobs:
     needs: use_from_flow_for_same_job
     if: always() && needs.use_from_flow_for_same_job.result != 'skipped' 
     uses: ./.github/workflows/self_hosted_run.yml
+    with:
+      re_upload_apks: true
       
