@@ -8,7 +8,11 @@ on:
        required: false
        type: boolean
        default: false
-       
+     re_upload_apks:
+      description: Set to true if you want to re-upload apks 
+      required: false
+      type: boolean
+      default: false
 
 jobs:
   build:
@@ -58,7 +62,7 @@ jobs:
             path: tmp/results
 
        - name: Re-Upload Same artifact
-         if: always() && inputs.use_artifacts_from_flow == true
+         if: always() && inputs.re_upload_apks == true
          uses: actions/upload-artifact@v4
          with:
             name: APKs-re-uploaded
