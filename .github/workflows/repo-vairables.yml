@@ -10,3 +10,18 @@ jobs:
     needs: create_apks
     if: always() && needs.create_apks.result != 'skipped' 
     uses: ./.github/workflows/download_apks.yml
+
+  use_from_flow:
+    needs: create_apks
+    if: always() && needs.create_apks.result != 'skipped' 
+    uses: ./.github/workflows/self_hosted_run.yml
+    with:
+      use_artifacts_from_flow: false
+
+  create_new:
+    needs: use_from_flow
+    if: always() && needs.use_from_flow.result != 'skipped' 
+    uses: ./.github/workflows/self_hosted_run.yml
+    with:
+      use_artifacts_from_flow: true     
+      
