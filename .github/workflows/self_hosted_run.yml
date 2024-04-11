@@ -54,7 +54,7 @@ jobs:
          if: always() && inputs.use_artifacts_from_flow == false
          uses: actions/upload-artifact@v4
          with:
-            name: APKs-new
+            name: APKs-created-a-new
             path: tmp/results
 
        - name: Re-Upload Same artifact
@@ -64,5 +64,10 @@ jobs:
             name: APKs-re-uploaded
             path: tmp/results
           
-
+       - name: Re-Upload Same artifact with same name 
+         if: always() && inputs.use_artifacts_from_flow == true
+         uses: actions/upload-artifact@v4
+         with:
+            name: APKs
+            path: tmp/results
           
