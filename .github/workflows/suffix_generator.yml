@@ -1,0 +1,27 @@
+name: suffix 
+
+on:
+  workflow_call:
+     
+jobs:
+ build:
+   runs-on: ubuntu-latest
+   strategy:
+      matrix: 
+        flankConfig: [flank_screenshot.yml, flank_screenshot_DE.yml, flank_screenshot_ES.yml]
+      fail-fast: false 
+      max-parallel: 1 
+
+   steps:
+   - name: Compute run localization run suffix
+     if: always()
+     run: |
+       if [[ "${{ matrix.flankConfig }}" == *_DE.yml* ]]; then
+           export TEST_LOCALE="de_DE"
+       elif  [[ "${{ matrix.flankConfig }}" == *_ES.yml* ]]; then
+          export TEST_LOCALE="es_MX"
+       else   
+         export TEST_LOCALE="en_US"
+       fi
+       echo "TEST_LOCALE=$TEST_LOCALE" >> $GITHUB_ENV
+       echo "$TEST_LOCALE" 
