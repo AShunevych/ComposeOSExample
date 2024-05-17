@@ -17,9 +17,9 @@ jobs:
    - name: Compute run localization run suffix
      if: always()
      run: |
-       if [[ "${{ matrix.flankConfig }}" == *_DE.yml* ]]; then
+       if [[ "${{ matrix.flankConfig }}" = *_DE.yml* ]]; then
            export TEST_LOCALE="de_DE"
-       elif  [[ "${{ matrix.flankConfig }}" == *_ES.yml* ]]; then
+       elif  [[ "${{ matrix.flankConfig }}" = *_ES.yml* ]]; then
           export TEST_LOCALE="es_MX"
        else   
          export TEST_LOCALE="en_US"
